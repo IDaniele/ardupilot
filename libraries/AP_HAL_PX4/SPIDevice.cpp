@@ -50,6 +50,7 @@ namespace PX4 {
 #define KHZ (1000U)
 
 SPIDesc SPIDeviceManager::device_table[] = {
+    SPIDesc("dwm1000",    PX4_SPI_BUS_EXT, (spi_dev_e)PX4_SPIDEV_EXT0, SPIDEV_MODE0, 3*MHZ, 20*MHZ),
 #if defined(PX4_SPIDEV_MPU)
     SPIDesc("mpu6000",      PX4_SPI_BUS_SENSORS, (spi_dev_e)PX4_SPIDEV_MPU, SPIDEV_MODE3, 500*KHZ, 8*MHZ),
 #endif
