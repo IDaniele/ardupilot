@@ -73,6 +73,7 @@
  */
 
 #include "Copter.h"
+#include <AP_TDoA/AP_TDoA.cpp>  //  I know this shouldn't be here, I'll worry about this later. (linker doesn't find function definitions w/o this)
 
 #define SCHED_TASK(func, rate_hz, max_time_micros) SCHED_TASK_CLASS(Copter, &copter, func, rate_hz, max_time_micros)
 
@@ -85,6 +86,7 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
     SCHED_TASK(rc_loop,              100,    130),
     SCHED_TASK(throttle_loop,         50,     75),
     SCHED_TASK(update_GPS,            50,    200),
+    SCHED_TASK(tdoa,                   1,    200),  //  1Hz for know
 #if OPTFLOW == ENABLED
     SCHED_TASK(update_optical_flow,  200,    160),
 #endif
@@ -159,6 +161,15 @@ const AP_Scheduler::Task Copter::scheduler_tasks[] = {
     SCHED_TASK(stats_update,           1,    100),
 };
 
+void Copter::tdoa()
+{
+    if(_tdoa == nullptr){
+        _tdoa = new AP_TDoA;
+        _tdoa->init();
+    }
+
+    //hal.console->printf("\n tdoa \n");
+}
 
 void Copter::setup() 
 {
