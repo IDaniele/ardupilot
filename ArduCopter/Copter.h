@@ -35,6 +35,8 @@
 #include <StorageManager/StorageManager.h>
 
 // Application dependencies
+#include <AP_TDoA/AP_TDoA.h>
+
 #include <GCS_MAVLink/GCS.h>
 #include <AP_SerialManager/AP_SerialManager.h>   // Serial manager library
 #include <AP_GPS/AP_GPS.h>             // ArduPilot GPS library
@@ -151,6 +153,9 @@ public:
     void loop() override;
 
 private:
+    
+    AP_TDoA *_tdoa;
+    
     // key aircraft parameters passed to multiple libraries
     AP_Vehicle::MultiCopter aparm;
 
@@ -632,6 +637,8 @@ private:
     static const AP_Param::Info var_info[];
     static const struct LogStructure log_structure[];
 
+    void tdoa();
+    
     void compass_accumulate(void);
     void compass_cal_update(void);
     void barometer_accumulate(void);
