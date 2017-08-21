@@ -34,7 +34,7 @@
 //Time stamp data type
 typedef union dwTime_u {
   uint8_t raw[5];
-  uint64_t full;    //I need This :)
+  uint64_t full;    //I need This
   struct {
     uint32_t low32;
     uint8_t high8;
