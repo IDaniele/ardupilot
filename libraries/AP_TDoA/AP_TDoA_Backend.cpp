@@ -19,12 +19,12 @@ AP_TDoA_Backend::AP_TDoA_Backend(AP_HAL::OwnPtr<AP_HAL::SPIDevice> dev){
     uint32_t id = 0x00000000;
     if(!_dev->read_registers(DEV_ID, (uint8_t*)&id, LEN_DEV_ID)){
         hal.console->printf("\n AP_TDoA_Backend.cpp constructor READ ERROR \n");
-        _dev->get_semaphore()->give();
+        _sem->give();
         return;
     }
     if(id != DWM1000_ID){
         hal.console->printf("\n AP_TDoA_Backend.cpp constructor ID ERROR \n ID = %08x \n", id);
-        _dev->get_semaphore()->give();
+        _sem->give();
         return;
     }
     _sem->give();
