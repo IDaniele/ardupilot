@@ -35,6 +35,7 @@ AP_TDoA_Backend::AP_TDoA_Backend(AP_HAL::OwnPtr<AP_HAL::SPIDevice> dev){
 bool AP_TDoA_Backend::conf_dwm(){
     hal.console->printf("\n AP_TDoA_Backend.cpp conf_dwm \n");
 
+    
     if (!_dev) {
         hal.console->printf("\n AP_TDoA_Backend.cpp conf_dwm DEV NOT FOUND \n");
         return false;
