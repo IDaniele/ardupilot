@@ -166,6 +166,7 @@ void Copter::tdoa()
     if(_tdoa == nullptr){
         _tdoa = new AP_TDoA;
         _tdoa->init();
+        _tdoa->conf_dwm();
     }
 
     //hal.console->printf("\n tdoa \n");
