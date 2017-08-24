@@ -12,7 +12,10 @@ public:
     friend class AP_TDoA_Backend;
     AP_TDoA();
     void init();
+    void conf_dwm();
 
 private:
+    AP_HAL::OwnPtr<AP_HAL::SPIDevice> _dev;
     AP_TDoA_Backend *_driver;
+    AP_HAL::Semaphore *_sem;
 };
