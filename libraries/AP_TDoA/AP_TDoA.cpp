@@ -103,7 +103,7 @@ void AP_TDoA::init(){
     }
     _sem->give();
     hal.console->printf("\n AP_TDoA.cpp DEV_ID CHECKED \n");
-    _dev->set_speed(AP_HAL::Device::SPEED_HIGH);
+    //_dev->set_speed(AP_HAL::Device::SPEED_HIGH);
     if(_dev->register_periodic_callback( 1000000, FUNCTOR_BIND_MEMBER(&AP_TDoA::dummy, void)) == nullptr){
         hal.console->printf("\n callback    nullptr \n");
     }
