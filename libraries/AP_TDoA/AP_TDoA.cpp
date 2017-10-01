@@ -375,6 +375,7 @@ void AP_TDoA::tdoa(){
     double *b = new double[m];
     double* svd;
 /*
+    QUESTO Ãˆ IL METODO CHE USAVO PRIMA
     int j = 0;
     bool first = false;
     int8_t ref1 = -1, ref2 = -1;
@@ -384,9 +385,9 @@ void AP_TDoA::tdoa(){
                 if(ref2 < 0){
                     ref2 = i;
                 }
-                a[j*n+0] = (anchorPositionRAW[i][0] / uwbTdoaDistDiff[i]) - (anchorPositionRAW[ref1][0] / uwbTdoaDistDiff[ref1]);
-                a[j*n+1] = (anchorPositionRAW[i][1] / uwbTdoaDistDiff[i]) - (anchorPositionRAW[ref1][1] / uwbTdoaDistDiff[ref1]);
-                a[j*n+2] = (anchorPositionRAW[i][2] / uwbTdoaDistDiff[i]) - (anchorPositionRAW[ref1][2] / uwbTdoaDistDiff[ref1]);
+                a[j*n+0] = ((2*anchorPositionRAW[i][0]) / uwbTdoaDistDiff[i]) - ((2*anchorPositionRAW[ref1][0]) / uwbTdoaDistDiff[ref1]);
+                a[j*n+1] = ((2*anchorPositionRAW[i][1]) / uwbTdoaDistDiff[i]) - ((2*anchorPositionRAW[ref1][1]) / uwbTdoaDistDiff[ref1]);
+                a[j*n+2] = ((2*anchorPositionRAW[i][2]) / uwbTdoaDistDiff[i]) - ((2*anchorPositionRAW[ref1][2]) / uwbTdoaDistDiff[ref1]);
                 double pm, pref;
                 pm = (pow(anchorPositionRAW[i][0],2) + pow(anchorPositionRAW[i][1],2) + pow(anchorPositionRAW[i][2],2)) / uwbTdoaDistDiff[i];
                 pref = (pow(anchorPositionRAW[ref1][0],2) + pow(anchorPositionRAW[ref1][1],2) + pow(anchorPositionRAW[ref1][2],2)) / uwbTdoaDistDiff[ref1];
@@ -399,9 +400,9 @@ void AP_TDoA::tdoa(){
         }
     }
 
-    a[j*n+0] = (anchorPositionRAW[ref1][0] / uwbTdoaDistDiff[ref1]) - (anchorPositionRAW[ref2][0] / uwbTdoaDistDiff[ref2]);
-    a[j*n+1] = (anchorPositionRAW[ref1][1] / uwbTdoaDistDiff[ref1]) - (anchorPositionRAW[ref2][1] / uwbTdoaDistDiff[ref2]);
-    a[j*n+2] = (anchorPositionRAW[ref1][2] / uwbTdoaDistDiff[ref1]) - (anchorPositionRAW[ref2][2] / uwbTdoaDistDiff[ref2]);
+    a[j*n+0] = ((2*anchorPositionRAW[ref1][0]) / uwbTdoaDistDiff[ref1]) - ((2*anchorPositionRAW[ref2][0]) / uwbTdoaDistDiff[ref2]);
+    a[j*n+1] = ((2*anchorPositionRAW[ref1][1]) / uwbTdoaDistDiff[ref1]) - ((2*anchorPositionRAW[ref2][1]) / uwbTdoaDistDiff[ref2]);
+    a[j*n+2] = ((2*anchorPositionRAW[ref1][2]) / uwbTdoaDistDiff[ref1]) - ((2*anchorPositionRAW[ref2][2]) / uwbTdoaDistDiff[ref2]);
     double pm, pref;
     pm = (pow(anchorPositionRAW[ref1][0],2) + pow(anchorPositionRAW[ref1][1],2) + pow(anchorPositionRAW[ref1][2],2)) / uwbTdoaDistDiff[ref1];
     pref = (pow(anchorPositionRAW[ref2][0],2) + pow(anchorPositionRAW[ref2][1],2) + pow(anchorPositionRAW[ref2][2],2)) / uwbTdoaDistDiff[ref2];
@@ -452,7 +453,7 @@ void AP_TDoA::tdoa(){
     delete[] b;
 }
 
-// QUESTA È LA FUNZIONE CHE ESEGUE L'OTTIMIZZAZIONE DEL RISULTATO COME NEL PAPER.
+// QUESTA Ãˆ LA FUNZIONE CHE ESEGUE L'OTTIMIZZAZIONE DEL RISULTATO COME NEL PAPER.
 void AP_TDoA::minimize(double b[], double teta0[], int m, double r1){
     double *A2t = transpose(A2,m,3);
     double *A3t = transpose(A3,m,1);
@@ -478,7 +479,7 @@ void AP_TDoA::minimize(double b[], double teta0[], int m, double r1){
         ttt1 = pow(*ttt, 0.5);
         ttt2 = pow(*ttt, -0.5);
 
-        //   QUI C'È UN MUCCHIO DI MEMORY LEAK PERCHÉ HO SCRITTO QUESTA PARTE DI FRETTA. COMUNQUE FINCHÉ LA MEMORIA NON SATURA NON INFLUISCE SUL RISULTATO
+        //   QUI C'Ãˆ UN MUCCHIO DI MEMORY LEAK PERCHÃ‰ HO SCRITTO QUESTA PARTE DI FRETTA. COMUNQUE FINCHÃ‰ LA MEMORIA NON SATURA NON INFLUISCE SUL RISULTATO
 
         double *beta = submatrix(addmatrix(multiply(A2, teta0, m, 3, 3, 1),multiplyscalar(A3, ttt1, m, 1), m, 1), b, m, 1);
         double *mu = multiply(invert(multiply(G, transpose(G, m, m), m, m, m, m), m), beta, m, m, m, 1);
