@@ -141,31 +141,31 @@ void AP_TDoA::dummy(void){
                            +    pow((anchorPositionRAW[1][1] - anchorPositionRAW[0][1]),2)
                            +    pow((anchorPositionRAW[1][2] - anchorPositionRAW[0][2]),2)
                            -    pow(diffdistprova[0],2)
-                       );
+                       ) / 2;
     b[1] = (
                                 pow((anchorPositionRAW[2][0] - anchorPositionRAW[0][0]),2)
                            +    pow((anchorPositionRAW[2][1] - anchorPositionRAW[0][1]),2)
                            +    pow((anchorPositionRAW[2][2] - anchorPositionRAW[0][2]),2)
                            -    pow(diffdistprova[1],2)
-                       );
+                       ) / 2;
     b[2] = (
                                 pow((anchorPositionRAW[3][0] - anchorPositionRAW[0][0]),2)
                            +    pow((anchorPositionRAW[3][1] - anchorPositionRAW[0][1]),2)
                            +    pow((anchorPositionRAW[3][2] - anchorPositionRAW[0][2]),2)
                            -    pow(diffdistprova[2],2)
-                       );
+                       ) / 2;
     b[3] = (
                                 pow((anchorPositionRAW[4][0] - anchorPositionRAW[0][0]),2)
                            +    pow((anchorPositionRAW[4][1] - anchorPositionRAW[0][1]),2)
                            +    pow((anchorPositionRAW[4][2] - anchorPositionRAW[0][2]),2)
                            -    pow(diffdistprova[3],2)
-                       );
+                       ) / 2;
     b[4] = (
                                 pow((anchorPositionRAW[5][0] - anchorPositionRAW[0][0]),2)
                            +    pow((anchorPositionRAW[5][1] - anchorPositionRAW[0][1]),2)
                            +    pow((anchorPositionRAW[5][2] - anchorPositionRAW[0][2]),2)
                            -    pow(diffdistprova[4],2)
-                       );
+                       ) / 2;
 
     double *a = new double[5*4];
     int j = 0;
@@ -422,7 +422,7 @@ void AP_TDoA::tdoa(){
                        +    pow((anchorPositionRAW[i][1] - anchorPositionRAW[0][1]),2)
                        +    pow((anchorPositionRAW[i][2] - anchorPositionRAW[0][2]),2)
                        -    pow(uwbTdoaDistDiff[i],2)
-                   );
+                   ) / 2.0l;
             j++;
         }
     }
