@@ -252,7 +252,7 @@ void AP_TDoA::enqueue(){
     if( (countQueue[readyQueue] >= 4) && (recvQueue[readyQueue][0].rxtime != 0) ){
         //STORE DATA RIGHT AWAY BECAUSE OF RUN CONDITION
         recvData queue[LOCODECK_NR_OF_ANCHORS];
-        memcpy(queue, recvQueue[readyQueue], sizeof(recvQueue[readyQueue]));
+        memcpy(queue, recvQueue[readyQueue], LOCODECK_NR_OF_ANCHORS*sizeof(recvData));
         for(uint8_t i=0; i< LOCODECK_NR_OF_ANCHORS; i++){
             if ( (queue[i].anchor < LOCODECK_NR_OF_ANCHORS) && (queue[i].rxtime != 0)) {
                 rangePacket_t* packet = (rangePacket_t*)queue[i].newpack.payload;
@@ -370,7 +370,7 @@ void AP_TDoA::tdoa(){
     //*/
 }
 
-// QUESTA È LA FUNZIONE CHE ESEGUE L'OTTIMIZZAZIONE DEL RISULTATO COME NEL PAPER.
+// QUESTA Ãˆ LA FUNZIONE CHE ESEGUE L'OTTIMIZZAZIONE DEL RISULTATO COME NEL PAPER.
 void AP_TDoA::minimize(double b[], double teta0[], int m, double r1){
     double *A2t = transpose(A2,m,3);
     double *A3t = transpose(A3,m,1);
@@ -444,7 +444,7 @@ void AP_TDoA::minimize(double b[], double teta0[], int m, double r1){
         double *sottr02 = submatrix(omegafiomega,G1G1t,m,m);
         double *mutsottr02 = multiply(mut, sottr02, 1, m, m, m);
         double *mutsottr02mu = multiply(mutsottr02, mu, 1, m, m, 1);
-        double x = *mutsottr02mu;//mutsottr02mu è uno scalare
+        double x = *mutsottr02mu;//mutsottr02mu Ã¨ uno scalare
         x = 2*x;
         x = pow(*ttt, -1)*x;
         double *psi3 = multiplyscalar( teta0teta0t, x, 3, 3 );
