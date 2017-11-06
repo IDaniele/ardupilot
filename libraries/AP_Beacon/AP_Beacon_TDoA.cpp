@@ -22,6 +22,6 @@ AP_Beacon_TDoA::AP_Beacon_TDoA(AP_Beacon &frontend, AP_SerialManager &serial_man
 void AP_Beacon_TDoA::update(void)
 {
     _tdoa->enqueue();
-    float nonlosoancòra = 1.0f;
-    set_vehicle_position(_tdoa->getEstimatedPosition(), nonlosoancòra);
+    float nonlosoancora = 1.0f;
+    set_vehicle_position(_tdoa->getEstimatedPosition(), nonlosoancora);
 }
