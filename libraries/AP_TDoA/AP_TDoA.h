@@ -28,7 +28,6 @@ private:
     static double _anchorPosition[LOCODECK_NR_OF_ANCHORS][3];
 
 public:
-    friend class AP_TDoA_Backend;
     AP_TDoA();
     void init();
     void initDwDev();
