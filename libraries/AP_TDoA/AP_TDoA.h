@@ -11,8 +11,6 @@ using namespace std;
 
 static const int DIM_QUEUE = 10;
 
-class AP_TDoA_Backend;
-
 class AP_TDoA{
 private:
     dwDevice_t* dwDev;
